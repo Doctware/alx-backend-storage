@@ -1,0 +1,2 @@
+// delete the provided Doc in the given collection
+db.school.deleteMany({"name": "Holberton school"})
