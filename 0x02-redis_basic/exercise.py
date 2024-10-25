@@ -18,9 +18,11 @@ def count_calls(method: Callable) -> Callable:
         the wrapper methos thats increment the call count
         then call the origina; method
         """
+
         key = method.__qualname__
         self._redis.incr(key)
         return method(self, *args, **kwargs)
+
     return wrapper
 
 
@@ -33,6 +35,7 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """
         this method generate a random key
