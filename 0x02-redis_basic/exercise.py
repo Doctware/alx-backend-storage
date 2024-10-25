@@ -8,7 +8,7 @@ import uuid
 import functools
 
 
-def count_call(method: Callable) -> Callable:
+def count_calls(method: Callable) -> Callable:
     """
     this decorator count the times methos were called
     """
