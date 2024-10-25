@@ -18,7 +18,7 @@ def count_calls(method: Callable) -> Callable:
         the wrapper methos thats increment the call count
         then call the origina; method
         """
-        key = f"{method.__qualname__}:calls"
+        key = method.__qualname__
         self._redis.incr(key)
         return method(self, *args, **kwargs)
     return wrapper
