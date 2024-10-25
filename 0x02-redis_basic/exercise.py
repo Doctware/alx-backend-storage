@@ -2,7 +2,7 @@
 """
 this module implement redis basic function
 """
-from typing import Union
+from typing import Union, Callable, Optional
 import redis
 import uuid
 
@@ -25,3 +25,30 @@ class Cache:
         key = str(uuid.uuid4())
         self._redis.set(key, data)
         return key
+
+    def get(
+        self, key: str, fn: Optional[Callable] = None
+    ) -> Union[str, float, int, bytes, None]:
+        """
+        Get method implementing geting cammand
+        """
+        value = self._redis.get(key)
+        if value is None:
+            return None
+        if fn:
+            return fn(value)
+        return value
+
+    def get_str(self, key: str) -> Optional[str]:
+        """
+        This method implment get
+        and return an optinal str
+        """
+        return self.get(key, fn=lambda d: d.decode("utf-8"))
+
+    def get_int(self, key: int) -> Optional[int]:
+        """
+        this methis implement get
+        then return optional int
+        """
+        return self.get(key, fn=int)
