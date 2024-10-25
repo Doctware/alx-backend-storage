@@ -5,6 +5,23 @@ this module implement redis basic function
 from typing import Union, Callable, Optional
 import redis
 import uuid
+import functools
+
+
+def count_call(method: Callable) -> Callable:
+    """
+    this decorator count the times methos were called
+    """
+    @functools.wraps(method)
+    def wrapper(self, *arg, **args):
+        """
+        the wrapper methos thats increment the call count
+        then call the origina; method
+        """
+        key = f"{mthod.__qualname__}:calls"
+        self._redif.incr(key)
+        return method(self, *arg, **args)
+    return wrapper
 
 
 class Cache:
