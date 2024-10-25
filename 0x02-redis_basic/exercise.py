@@ -13,14 +13,14 @@ def count_calls(method: Callable) -> Callable:
     this decorator count the times methos were called
     """
     @functools.wraps(method)
-    def wrapper(self, *arg, **args):
+    def wrapper(self, *args, **kwargs):
         """
         the wrapper methos thats increment the call count
         then call the origina; method
         """
-        key = f"{mthod.__qualname__}:calls"
-        self._redif.incr(key)
-        return method(self, *arg, **args)
+        key = f"{method.__qualname__}:calls"
+        self._redis.incr(key)
+        return method(self, *args, **kwargs)
     return wrapper
 
 
