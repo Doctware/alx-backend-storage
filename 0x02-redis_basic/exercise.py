@@ -30,7 +30,7 @@ def call_history(method: Callable) -> Callable:
     """
     thos decorator store history of input and output for a fuction
     """
-    @functools.wraps(methiod)
+    @functools.wraps(method)
     def wrapper(self, *args, **kwargs):
         """
         the wrapper methos thaats logs the input and output
