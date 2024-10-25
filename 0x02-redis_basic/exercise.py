@@ -30,7 +30,7 @@ def call_history(method: Callable) -> Callable:
     """
     thos decorator store history of input and output for a fuction
     """
-    @functool.wraps(methos)
+    @functools.wraps(methiod)
     def wrapper(self, *args, **kwargs):
         """
         the wrapper methos thaats logs the input and output
@@ -89,7 +89,7 @@ class Cache:
         """
         return self.get(key, fn=lambda d: d.decode("utf-8"))
 
-    def get_int(self, key: int) -> Optional[int]:
+    def get_int(self, key: str) -> Optional[int]:
         """
         this methis implement get
         then return optional int
